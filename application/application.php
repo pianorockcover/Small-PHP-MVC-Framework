@@ -7,13 +7,19 @@ class Application
 
 	function __construct($config)
 	{
-		#... Создать реестр для config
-		#... Создать реестр для query
+		# Проверить запрос на ниличие инъекций
+
+		ConfigRegistry::init($config);
+		QueryRegistry::init($_SERVER['REQUEST_URI']);
+
+		exit();
+		
+		return;
 	}
 
 	public function run()
 	{
-		$this->router = new Router($query);
+		$this->router = new Router();
 		$controller = $router->getController();
 		$action = $action->getAction();
 		$controller->$action();
