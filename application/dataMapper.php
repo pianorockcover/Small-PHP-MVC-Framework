@@ -1,25 +1,42 @@
 <?php
-class DataMapper
+namespace application;
+
+abstract class DataMapper
 {
-	private $query = NULL;
-	
+	private $query;
+	private $mysqli;
+	private $dbConfiguration;
+
+	abstract public function table();
+
 	public function __construct()
 	{
-		#... Подключение к базе
+		$dbConfiguration = ConfigRegistry::getInstance()->getDBConfiguration();
+		$mysqli = new mysqli($dbConfiguration['host'], 
+							$dbConfiguration['user'],
+							$dbConfiguration['password'],
+							$dbConfiguration['name'],);
 	}
 
-	public function query()
+	public function query($query)
 	{
-		#... Добавить запрос
+		$this->query = $query;
 	}
 
-	public functon execute()
+	public function execute()
 	{
-		#... Выполнить запрос
+		$this->mysqli = $mysqli->query($this->query);
+
+		$results = [];
+		while ($row = $query->fetch_assoc()) {
+			array_push($results, $row);
+		} 
+
+		return $results;
 	}
 
 	public function __destruct()
 	{
-		#... Отключиться от базы
+		$this->mysqli->close();
 	}
 }

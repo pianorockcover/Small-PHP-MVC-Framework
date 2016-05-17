@@ -2,13 +2,18 @@
 namespace controllers;
 
 use \application\Controller;
+use \models\News;
 
 class SiteController extends Controller
 {
 	function actionIndex(...$params)
 	{
 		#... Вытаскиваем новости из базы
-		return $this->render('index','main', ['title'=> 'Simple Engine',
-											  'text' => 'Hello Wordl']);
+		$news = new News;
+		$news->query("SELECT * FROM {$news->table()}");
+
+		$news = $news->execute();
+
+		return $this->render('index','main', $news);
 	}
 }

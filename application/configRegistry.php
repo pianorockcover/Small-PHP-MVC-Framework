@@ -3,16 +3,16 @@ namespace application;
 
 class ConfigRegistry extends Registry
 {
-	protected $dbName;
 	protected static $instance;
-
+	protected $db;
+	
 	protected function __construct($cashe) 
 	{ 
-		$this->dbName = $cashe['db']['name'];
+		$this->db = $cashe['db'];
 	}
 
-	public function getDBName()
+	public function getDBConfiguration()
 	{
-		return $this->dbName;
+		return $this->db;
 	}
 }
