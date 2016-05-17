@@ -10,13 +10,7 @@ class Application
 		# Проверить запрос на ниличие инъекций
 
 		ConfigRegistry::init($config);
-		QueryRegistry::init($_SERVER['REQUEST_URI']);
-
-		if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-			var_dump($_GET);
-		}
-		var_dump($_POST);
-		exit();
+		QueryRegistry::init(['get' => $_GET, 'post' => $_POST]);
 
 		return;
 	}
@@ -24,7 +18,7 @@ class Application
 	public function run()
 	{
 		try {
-			$this->router = new Router(QueryRegistry::getInstance()->getQuery());
+			$this->router = new Router(QueryRegistry::getInstance()->getParams());
 			$controller = $this->router->getController();
 			$action = $this->router->getAction();
 			$params = $this->router->getParams();

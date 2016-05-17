@@ -3,16 +3,23 @@ namespace application;
 
 class QueryRegistry extends Registry
 {
-	private $query;
+	private $get;
+	private $post;
 	protected static $instance;
 
 	protected function __construct($cashe) 
 	{ 
-		$this->query= $cashe;
+		$this->get = $cashe['get'];
+		$this->post = $cashe['post'];
 	}
 
-	public function getQuery()
+	public function getParams()
 	{
-		return $this->query;
+		if (!$this->post)
+		{
+			return $this->get;
+		}
+
+		return $this->post;
 	}
 }
