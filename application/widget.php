@@ -1,7 +1,7 @@
 <?php
 namespace application;
 
-abstract class Widget
+interface Widget
 {
-	abstract public function widget(...$params);
+	public function widget(...$params);
 }

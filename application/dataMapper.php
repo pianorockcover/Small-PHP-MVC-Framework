@@ -12,11 +12,7 @@ abstract class DataMapper
 	public function __construct()
 	{
 		$dbConfiguration = ConfigRegistry::getInstance()->getDBConfiguration();
-		echo "{$dbConfiguration['host']}, 
-				{$dbConfiguration['user']},
-				{$dbConfiguration['password']},
-				{$dbConfiguration['name']}";
-
+		
 		$this->mysqli = new \mysqli($dbConfiguration['host'], 
 							$dbConfiguration['user'],
 							$dbConfiguration['password'],
@@ -26,6 +22,17 @@ abstract class DataMapper
 	public function query($query)
 	{
 		$this->query = $query;
+	}
+
+	public function extendQuery($query)
+	{
+		$this->query .= $query;
+	}
+
+	public function amountOfRecords()
+	{
+		$rows = $this->mysqli->query($this->query);
+		return $rows->num_rows;	
 	}
 
 	public function execute()
