@@ -9,8 +9,8 @@ class Router
 
 	function __construct($query)
 	{
-		$this->controller = 'SiteController';
-		$this->action = 'actionIndex';
+		$this->controller = ConfigRegistry::getInstance()->getWebConfiguration()['defaultController'];
+		$this->action = ConfigRegistry::getInstance()->getWebConfiguration()['defaultAction'];
 		$this->actionParams = NULL;
 
 		# Парсим запросы типа: ?r=controler/action&param1=value&param2=value...
@@ -28,9 +28,7 @@ class Router
 			}
 
 			$actionAndController = $params['r'];
-
-			$this->controller = ucfirst(substr($actionAndController, 0, strpos($actionAndController, '/'))).'Controller';
-			
+			$this->controller = ucfirst(substr($actionAndController, 0, strpos($actionAndController, '/'))).'Controller';	
 			$this->action = 'action'.ucfirst(substr($actionAndController, strpos($actionAndController, '/') + 1, strlen($actionAndController)));	
 
 			if(count($params) > 1)
@@ -38,7 +36,6 @@ class Router
 				unset($params['r']);
 				$this->actionParams = $params; 
 			}
-
 		}
 
 		return;

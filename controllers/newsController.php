@@ -5,9 +5,9 @@ use \application\Controller;
 use \models\News;
 use \widgets\Pagination;
 
-class SiteController extends Controller
+class NewsController extends Controller
 {
-	function actionIndex($params)
+	function actionAll($params)
 	{
 		#... Вытаскиваем новости из базы
 		$news = new News;
