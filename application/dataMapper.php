@@ -36,17 +36,22 @@ abstract class DataMapper
 		return $rows->num_rows;	
 	}
 
+	public function getLastInsertedID()
+	{
+		return $this->mysqli->insert_id;
+	}
+
 	public function execute()
 	{
-		$this->query = $this->mysqli->query($this->query);
+		$query = $this->mysqli->query($this->query);
 
-		if (!is_bool($this->query)) 
+		if (!is_bool($query)) 
 		{
 			$results = [];
-			while ($row = $this->query->fetch_assoc()) {
+			while ($row = $query->fetch_assoc()) {
 				array_push($results, $row);
 			} 
-			
+
 			return $results;
 		}
 

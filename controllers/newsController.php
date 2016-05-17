@@ -101,13 +101,6 @@ class NewsController extends Controller
 
 	public function actionInsert($params)
 	{
-		$image = QueryRegistry::getInstance()->getFiles()['image'];
-
-		if (strpos($image['type'], 'image/') !== false)
-		{
-			file_put_contents("assets/images/{$params['news_id']}.jpg", file_get_contents($image['tmp_name']));
-		}
-		
 		# Защита от SQL инъекций
 		foreach ($params as $key => $param) {
 			$params[$key] = str_replace('\'', '`', $params[$key]);
@@ -122,6 +115,13 @@ class NewsController extends Controller
 								  		    '{$params['summary']}',
 								  		    '{$params['content']}')");
 		$news->execute();
+
+		$image = QueryRegistry::getInstance()->getFiles()['image'];
+
+		if (strpos($image['type'], 'image/') !== false)
+		{
+			file_put_contents("assets/images/{$news->getLastInsertedId()}.jpg", file_get_contents($image['tmp_name']));
+		}
 
 		return $this->actionAll(['offset' => 0]);
 	}
