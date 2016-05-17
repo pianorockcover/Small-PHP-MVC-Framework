@@ -5,12 +5,14 @@ class QueryRegistry extends Registry
 {
 	private $get;
 	private $post;
+	private $files;
 	protected static $instance;
 
 	protected function __construct($cashe) 
 	{ 
 		$this->get = $cashe['get'];
 		$this->post = $cashe['post'];
+		$this->files = $cashe['files'];
 	}
 
 	public function getParams()
@@ -21,5 +23,10 @@ class QueryRegistry extends Registry
 		}
 
 		return $this->post;
+	}
+
+	public function getFiles()
+	{
+		return $this->files;
 	}
 }

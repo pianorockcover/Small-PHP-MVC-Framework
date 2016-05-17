@@ -10,7 +10,7 @@ class Application
 		# Проверить запрос на ниличие инъекций
 
 		ConfigRegistry::init($config);
-		QueryRegistry::init(['get' => $_GET, 'post' => $_POST]);
+		QueryRegistry::init(['get' => $_GET, 'post' => $_POST, 'files' => $_FILES]);
 
 		return;
 	}

@@ -4,6 +4,7 @@ namespace controllers;
 use \application\Controller;
 use \models\News;
 use \widgets\Pagination;
+use \application\QueryRegistry;
 
 class NewsController extends Controller
 {
@@ -59,14 +60,19 @@ class NewsController extends Controller
 
 	public function actionUpdate($params)
 	{
-		var_dump($params);
+		$image = QueryRegistry::getInstance()->getFiles()['image'];
 
-		exit();
-		$news = new News;
+		if (strpos($image['type'], 'image/') !== false)
+		{
+			file_put_contents("assets/images/{$params['news_id']}.jpg", file_get_contents($image['tmp_name']));
+		}
+		
+		//  exit();
+		// $news = new News;
 
-		$news->query();
+		// $news->query();
 
-		// $this->edit(['id' => ]);
+		return $this->actionAll(['offset' => 0]);
 	}
 
 	public function actionDelete($params)
