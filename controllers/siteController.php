@@ -12,11 +12,19 @@ class SiteController extends Controller
 		#... Вытаскиваем новости из базы
 		$news = new News;
 
-		$news->query("SELECT * FROM {$news->table()}");
-
+		$news->query("SELECT news.news_id,
+							 news.date,
+							 news.title,
+							 news.summary,
+							 news.content,
+							 categories.name as category
+		 			  FROM {$news->table()}
+					  JOIN categories 
+					  ON {$news->table()}.category_id = categories.category_id");
 
 		$pagination = new Pagination(11, $params['offset'], $news);
-		$news->extendQuery(" WHERE {$news->table()}_id > {$pagination->offset()} LIMIT 10");
+		$news->extendQuery(" WHERE {$news->table()}_id > {$pagination->offset()} 
+							 LIMIT 10");
 		
 		$news = $news->execute();
 
