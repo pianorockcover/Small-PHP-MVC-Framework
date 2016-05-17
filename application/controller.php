@@ -2,6 +2,12 @@
 namespace application;
 
 abstract class Controller {
+	
+	function __call($action, $params)
+	{
+		throw new \Exception("Bad Request 404", 404);
+	}
+
 	function render($view, $layout, $params = NULL)
 	{
 		ob_start();

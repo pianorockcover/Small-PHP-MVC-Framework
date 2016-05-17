@@ -1,6 +1,9 @@
 <?php
 spl_autoload_register(function($class) {
-	require(lcfirst($class).'.php');
-	
+	if (file_exists(lcfirst($class).'.php'))
+	{
+		require(lcfirst($class).'.php');
+	}
+
 	return;
 });

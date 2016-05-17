@@ -20,6 +20,10 @@ class Router
 		{
 			$params = [];
 			foreach (explode('&', $query['query']) as $paramName => $paramValue) {
+				if (!isset(explode('=', $paramValue)[1]))
+				{
+					throw new \Exception("Bad Request 404", 404);
+				}
 				$params[explode('=', $paramValue)[0]] = explode('=', $paramValue)[1];
 			}
 
@@ -43,6 +47,10 @@ class Router
 	public function getController()
 	{
 		$controller = "\controllers\\{$this->controller}";
+		if (!class_exists($controller, true))
+		{
+			throw new \Exception("Bad Request 404", 404);
+		}
 		return new $controller;
 	}
 

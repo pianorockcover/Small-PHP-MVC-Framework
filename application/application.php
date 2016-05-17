@@ -18,13 +18,16 @@ class Application
 
 	public function run()
 	{
-		$this->router = new Router(QueryRegistry::getInstance()->getQuery());
-		
-		$controller = $this->router->getController();
-		$action = $this->router->getAction();
-		$params = $this->router->getParams();
+		try {
+			$this->router = new Router(QueryRegistry::getInstance()->getQuery());
+			$controller = $this->router->getController();
+			$action = $this->router->getAction();
+			$params = $this->router->getParams();
 
-		echo $controller->$action($params);
+			echo $controller->$action($params);
+		} catch (\Exception $e) {
+			echo $e->getMessage();
+		}
 
 		return;
 	}
