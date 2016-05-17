@@ -14,6 +14,7 @@ class SiteController extends Controller
 
 		$news = $news->execute();
 
-		return $this->render('index','main', $news);
+		return $this->render('index','main', ['title' => 'All News',
+											  'news' => $news,]);
 	}
 }

@@ -7,6 +7,6 @@ class News extends DataMapper
 {
 	public function table()
 	{
-		return 'news';
+		return 'film';
 	}
 }

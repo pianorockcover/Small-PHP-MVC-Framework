@@ -1,1 +1,1 @@
-<h1><?= $params['text']?></h1>
+<?php var_dump($params['news']); ?>
