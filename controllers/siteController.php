@@ -14,8 +14,9 @@ class SiteController extends Controller
 
 		$news->query("SELECT * FROM {$news->table()}");
 
+
 		$pagination = new Pagination(11, $params['offset'], $news);
-		$news->extendQuery(" WHERE {$news->table()}_id > {$params['offset']} LIMIT 10");
+		$news->extendQuery(" WHERE {$news->table()}_id > {$pagination->offset()} LIMIT 10");
 		
 		$news = $news->execute();
 

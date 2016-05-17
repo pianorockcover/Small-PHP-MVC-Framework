@@ -17,6 +17,7 @@ abstract class DataMapper
 							$dbConfiguration['user'],
 							$dbConfiguration['password'],
 							$dbConfiguration['name']);
+		$this->mysqli->set_charset('utf8');
 	}
 
 	public function query($query)

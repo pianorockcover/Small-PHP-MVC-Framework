@@ -1,7 +1,7 @@
 <?php
 $config = [
 	'db' => [
-		'name' => 'dvds',
+		'name' => 'chel_news',
 		'host' => 'localhost',
 		'user' => 'root',
 		'password' => '12345',

@@ -14,11 +14,15 @@ class Pagination implements Widget
 
 	public function __construct($limit, $offset, DataMapper $model)
 	{
+		$this->offset = $offset;
+		if (!isset($offset))
+		{
+			$this->offset = 0;
+		}
 		$this->amountOfRecords = $model->amountOfRecords();
 		$this->limit = $limit;
-		$this->offset = $offset;
-		$this->currentPage = floor($this->offset / $this->limit) + 1;
-		$this->amountOfPages = floor($this->amountOfRecords / $this->limit);
+		$this->currentPage = ceil($this->offset / $this->limit) + 1;
+		$this->amountOfPages = ceil($this->amountOfRecords / $this->limit);
 	}
 
 	public function limit()
@@ -28,7 +32,7 @@ class Pagination implements Widget
 
 	public function offset()
 	{
-		return $this->$offset;
+		return $this->offset;
 	}
 
 	public function widget(...$params)
