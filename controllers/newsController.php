@@ -67,10 +67,20 @@ class NewsController extends Controller
 			file_put_contents("assets/images/{$params['news_id']}.jpg", file_get_contents($image['tmp_name']));
 		}
 		
+		# Защита от SQL инъекций
+		foreach ($params as $key => $param) {
+			$params[$key] = str_replace('\'', '`', $params[$key]);
+			$params[$key] = str_replace('"', '`', $params[$key]);
+		}
+
 		$news = new News;
-
-		$news->query();
-
+		$news->query("UPDATE {$news->table()} 
+								  SET news.title = '{$params['title']}',
+								  		news.date = '{$params['date']}',
+								  		news.summary = '{$params['summary']}',
+								  		news.content = '{$params['content']}'
+								  WHERE news_id ='{$params['news_id']}'");
+		$news->execute();
 		return $this->actionAll(['offset' => 0]);
 	}
 

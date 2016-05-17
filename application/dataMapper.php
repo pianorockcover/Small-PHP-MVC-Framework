@@ -40,12 +40,17 @@ abstract class DataMapper
 	{
 		$this->query = $this->mysqli->query($this->query);
 
-		$results = [];
-		while ($row = $this->query->fetch_assoc()) {
-			array_push($results, $row);
-		} 
+		if (!is_bool($this->query)) 
+		{
+			$results = [];
+			while ($row = $this->query->fetch_assoc()) {
+				array_push($results, $row);
+			} 
+			
+			return $results;
+		}
 
-		return $results;
+		return $this->query;
 	}
 
 	public function __destruct()
