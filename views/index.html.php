@@ -4,7 +4,7 @@
 		<h2><?= $news['title'] ?></h2>
 		<img width = "200" src="assets/images/<?= $news['news_id'] ?>.jpg">
 		<p><?= $news['summary'] ?></p>
-		<button class="btn btn-read-more">Read more...</button>		
+		<a class="btn btn-read-more" href="index.php?r=news/fullView&news_id=<?=$news['news_id']?>">Read more...</a>		
 		<p class="muted"><?= $news['category'] ?></p>
 		<p><?= $news['date'] ?></p>
 		<a class="btn btn-edit" href="index.php?r=news/edit&news_id=<?= $news['news_id'] ?>">Редактировать</a>

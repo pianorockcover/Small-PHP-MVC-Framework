@@ -51,11 +51,11 @@ abstract class DataMapper
 			while ($row = $query->fetch_assoc()) {
 				array_push($results, $row);
 			} 
-
+			// var_dump($this->query);
 			return $results;
 		}
 
-		return $this->query;
+		return $query;
 	}
 
 	public function __destruct()

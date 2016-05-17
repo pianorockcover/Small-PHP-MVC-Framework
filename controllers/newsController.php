@@ -46,7 +46,7 @@ class NewsController extends Controller
 							 news.content,
 							 categories.name as category
 		 			  FROM {$news->table()}
-					  JOIN categories 
+					  LEFT JOIN categories 
 					  ON {$news->table()}.category_id = categories.category_id
 					  WHERE news_id = {$id}");
 
@@ -127,9 +127,29 @@ class NewsController extends Controller
 		return $this->actionAll(['offset' => 0]);
 	}
 
-	public function actionFUllView()
+	public function actionFullView($params)
 	{
-		
+		$id = $params['news_id'];
+
+		$news = new News;
+
+		$news->query("SELECT news.news_id,
+							 news.date,
+							 news.title,
+							 news.summary,
+							 news.content,
+							 categories.name as category
+		 			  FROM {$news->table()}
+					  LEFT JOIN categories 
+					  ON {$news->table()}.category_id = categories.category_id
+					  WHERE news_id = {$id}");
+
+		$news = $news->execute()[0];
+
+		return $this->render('full-view', 'main', [
+				 'title' => $news['title'],
+				 'news' => $news,
+			]);
 	}
 
 }
