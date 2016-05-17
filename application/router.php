@@ -9,8 +9,8 @@ class Router
 
 	function __construct($query)
 	{
-		$this->controller = 'site';
-		$this->action = 'index';
+		$this->controller = 'SiteController';
+		$this->action = 'actionIndex';
 		$this->actionParams = NULL;
 
 		# Парсим запросы типа: ?r=controler/action&param1=value&param2=value...
@@ -42,7 +42,8 @@ class Router
 
 	public function getController()
 	{
-		return $this->controller;
+		$controller = "\controllers\\{$this->controller}";
+		return new $controller;
 	}
 
 	public function getAction()

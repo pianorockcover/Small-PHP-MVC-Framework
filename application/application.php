@@ -24,11 +24,7 @@ class Application
 		$action = $this->router->getAction();
 		$params = $this->router->getParams();
 
-		echo '<br>'.$controller.'<br>';
-		echo $action.'<br>';
-		var_dump($params);
-
-		// $controller->$action($params);
+		echo $controller->$action($params);
 
 		return;
 	}
