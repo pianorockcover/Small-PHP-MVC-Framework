@@ -19,10 +19,10 @@ class NewsController extends Controller
 							 news.content,
 							 categories.name as category
 		 			  FROM {$news->table()}
-					  JOIN categories 
+					  LEFT JOIN categories 
 					  ON {$news->table()}.category_id = categories.category_id");
 
-		$pagination = new Pagination(11, $params['offset'], $news);
+		$pagination = new Pagination(10, $params['offset'], $news);
 		$news->extendQuery(" WHERE {$news->table()}_id > {$pagination->offset()} 
 							 LIMIT 10");
 		
@@ -35,7 +35,7 @@ class NewsController extends Controller
 	
 	public function actionEdit($params)
 	{
-		$id = $params['id'];
+		$id = $params['news_id'];
 
 		$news = new News;
 
@@ -86,10 +86,47 @@ class NewsController extends Controller
 
 	public function actionDelete($params)
 	{
-		$id = $params['id'];	
+		$news = new News;
+		$news->query("DELETE FROM {$news->table()} 
+								  WHERE news.news_id = {$params['news_id']}");
+		$news->execute();
+
+		return $this->actionAll(['offset' => 0]);
 	}
 
 	public function actionAdd($params)
+	{
+		return $this->render('add','main');
+	}
+
+	public function actionInsert($params)
+	{
+		$image = QueryRegistry::getInstance()->getFiles()['image'];
+
+		if (strpos($image['type'], 'image/') !== false)
+		{
+			file_put_contents("assets/images/{$params['news_id']}.jpg", file_get_contents($image['tmp_name']));
+		}
+		
+		# Защита от SQL инъекций
+		foreach ($params as $key => $param) {
+			$params[$key] = str_replace('\'', '`', $params[$key]);
+			$params[$key] = str_replace('"', '`', $params[$key]);
+		}
+
+		$news = new News;
+		$news->query("INSERT INTO {$news->table()} 
+									(`title`, `date`, `summary`, `content`)
+								  VALUES ('{$params['title']}',
+								  		    '{$params['date']}',
+								  		    '{$params['summary']}',
+								  		    '{$params['content']}')");
+		$news->execute();
+
+		return $this->actionAll(['offset' => 0]);
+	}
+
+	public function actionFUllView()
 	{
 		
 	}
