@@ -1,0 +1,109 @@
+@default-color: #fff;
+@primary-color: #337ab7;
+@danger-color: #d9534f;
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+html,
+body {
+	font-family: Open Sans;
+}
+
+.container {
+	margin: 0 auto;
+	margin-top: 20px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.item {
+	display: block;
+	margin-bottom: 20px;
+	margin-top: 20px;
+	h4, .date {
+		margin: 0px;
+	}
+
+	.date {
+		display: block;
+	}
+}
+.media-news {
+	.media-left {
+		display: inline;
+		overflow: hidden;
+		
+		img {
+			width: 200px;
+		}
+		padding-right: 10px;
+		padding-bottom: 10px;
+	}
+
+	margin-bottom: 10px;
+}
+
+.btn {
+	background-color: @default-color;
+    border: 1px solid darken(@default-color, 10%);
+    border-radius: 6px;
+    text-decoration: none;
+    color: #333;
+    padding: 5px;
+    cursor: pointer;
+    min-width: 100px;
+
+    &:hover {
+    	text-decoration: none;
+		background-color: darken(@default-color, 10%);
+    }
+
+    &-primary {
+		background-color: @primary-color;
+    	border: 1px solid darken(@primary-color, 10%);
+    	color: #fff;
+    	&:hover {
+    		background-color: darken(@primary-color, 10%);
+    	}
+    }
+
+    &-danger {
+		background-color: @danger-color;
+    	border: 1px solid darken(@danger-color, 10%);
+    	color: #fff;
+    	&:hover {
+    		background-color: darken(@danger-color, 10%);
+    	}
+    }
+}
+
+.muted {
+	color: lighten(#000, 50%);
+}
+
+.read-more {
+	display: inline;
+	text-decoration: none;
+}
+
+.form {
+	margin-top: 20px;
+
+	.input {
+		background-color: @default-color;
+    	border: 1px solid darken(@default-color, 30%);
+    	border-radius: 6px;
+    	height: 20px;
+    	font-size: 1em;
+    	padding: 5px;
+	}
+
+	.textarea {
+		height: 100px;
+		width: 300px;
+	}
+
+	table {
+		margin-bottom: 20px;
+	}
+}

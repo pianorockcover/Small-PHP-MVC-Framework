@@ -1,20 +1,31 @@
-<form enctype="multipart/form-data" action="index.php" class="media-news" method = "post">
+<a class="btn btn-default" href="index.php">На главную</a>
+<h1>Редактировать новость</h1>
+<form class="form" enctype="multipart/form-data" action="index.php" class="media-news" method = "post">
 	<input type="hidden" name="r" value="news/update">
 	<input type="hidden" name="news_id" value="<?= $params['news']['news_id'] ?>">
-	<b>Title</b>
-	<input type="text" name="title" value="<?= $params['news']['title'] ?>">
-	<br>
-	<b>Date</b>
-	<input type="text" name="date" value="<?= $params['news']['date'] ?>">
-	<br>
-	<b>Summary</b>
-	<textarea name="summary"><?= $params['news']['summary'] ?></textarea>
-	<br>
-	<b>Content</b>
-	<textarea name="content"><?= $params['news']['content'] ?></textarea>
-	<br>
-	<b>Image</b>
-	<input name="image" type="file" accept="image/jpeg"/>
-	<br>
-	<button type="submit">Update</button>
+	<table>
+		<tbody>
+			<tr>
+				<td><b>Title:</b></td>
+				<td><input class="input" type="text" name="title" value="<?= $params['news']['title'] ?>"></td>
+			</tr>
+			<tr>
+				<td><b>Date:</b></td>
+				<td><input class="input" type="text" name="date" value="<?= $params['news']['date'] ?>"></td>
+			</tr>
+			<tr>
+				<td><b>Summary:</b></td>
+				<td><textarea class="input textarea" name="summary"><?= $params['news']['summary'] ?></textarea></td>
+			</tr>
+			<tr>
+				<td><b>Content:</b></td>
+				<td><textarea class="input textarea" name="content"><?= $params['news']['content'] ?></textarea></td>
+			</tr>
+			<tr>
+				<td><b>Image:</b></td>
+				<td><input name="image" type="file" accept="image/jpeg"/></td>
+			</tr>
+		</tbody>
+	</table>
+	<button class="btn btn-primary" type="submit">Редактировать</button>
 </form>
