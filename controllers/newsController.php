@@ -67,10 +67,9 @@ class NewsController extends Controller
 			file_put_contents("assets/images/{$params['news_id']}.jpg", file_get_contents($image['tmp_name']));
 		}
 		
-		//  exit();
-		// $news = new News;
+		$news = new News;
 
-		// $news->query();
+		$news->query();
 
 		return $this->actionAll(['offset' => 0]);
 	}
