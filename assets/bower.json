@@ -1,0 +1,20 @@
+{
+  "name": "nextype-task-frontend",
+  "homepage": "index.php",
+  "authors": [
+    "pianorockcover <pianorockcover@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "less": "^2.7.1"
+  }
+}
