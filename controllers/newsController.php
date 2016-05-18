@@ -110,6 +110,11 @@ class NewsController extends Controller
 								  WHERE news.news_id = {$params['news_id']}");
 		$news->execute();
 
+		if(file_exists("assets/images/{$params['news_id']}.jpg"))
+		{
+			unlink("assets/images/{$params['news_id']}.jpg");
+		}
+
 		$news->query("SELECT * FROM news; ");
 		$amountOfRecords = $news->amountOfRecords();
 
@@ -118,12 +123,11 @@ class NewsController extends Controller
 			$news->query("UPDATE news
 								SET news.news_id = {$i}
 									WHERE news.news_id = {$next}; ");
-			$news->execute();
-		}
 
-		if(file_exists("assets/images/{$params['news_id']}.jpg"))
-		{
-			unlink("assets/images/{$params['news_id']}.jpg");
+			$news->execute();
+			
+			if (file_exists("assets/images/{$next}.jpg"))
+			rename("assets/images/{$next}.jpg", "assets/images/{$i}.jpg");
 		}
 
 		return $this->actionAll(['offset' => 0]);
