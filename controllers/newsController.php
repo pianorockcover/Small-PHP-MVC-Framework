@@ -25,7 +25,7 @@ class NewsController extends Controller
 
 		$pagination = new Pagination(10, $params['offset'], $news);
 		$news->extendQuery(" WHERE {$news->table()}_id > {$pagination->offset()}
-							 ORDER BY news_id DESC 
+							 ORDER BY news_id ASC
 							 LIMIT 10");
 		
 		$news = $news->execute();

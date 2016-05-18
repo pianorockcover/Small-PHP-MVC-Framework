@@ -6,7 +6,7 @@
 		<tbody>
 			<tr>
 				<td class="media-left">
-					<img src="assets/images/<?= $news['news_id'] ?>.jpg">
+					<img src="assets/images/<?= $news['news_id'] ?>.jpg" alt="Нет изображения">
 				</td>
 				<td class="media-body">
 					<h4><?= $news['title'] ?></h4>

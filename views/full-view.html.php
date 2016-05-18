@@ -3,7 +3,7 @@
 		<tbody>
 			<tr>
 				<td class="media-left">
-					<img src="assets/images/<?= $params['news']['news_id'] ?>.jpg">
+					<img src="assets/images/<?= $params['news']['news_id'] ?>.jpg" alt="Нет изображения">
 				</td>
 				<td class="media-body">
 					<h4><?= $params['news']['title'] ?></h4>
@@ -12,7 +12,6 @@
 					<p>
 					</p>
 						<?= $params['news']['content'] ?>
-						<a class="read-more" href="index.php?r=news/fullView&news_id=<?=$params['news']['news_id']?>">Читать далее...</a>		
 						<span class="muted date"><?= $params['news']['date'] ?></span>
 					</p>	
 
