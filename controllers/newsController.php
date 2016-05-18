@@ -107,7 +107,10 @@ class NewsController extends Controller
 		$news->query("DELETE FROM {$news->table()} 
 								  WHERE news.news_id = {$params['news_id']}");
 		$news->execute();
-		unlink("assets/images/{$params['news_id']}.jpg");
+		if(file_exists("assets/images/{$params['news_id']}.jpg"))
+		{
+			unlink("assets/images/{$params['news_id']}.jpg");
+		}
 
 		return $this->actionAll(['offset' => 0]);
 	}

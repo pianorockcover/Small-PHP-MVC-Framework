@@ -39,16 +39,16 @@ class Pagination implements Widget
 	{
 		// var_dump($this->currentPage);
 		// var_dump($this->amountOfPages);
-		for ($i = 1; $i <= $this->amountOfPages; $i++) { 
+		echo '<div class="input-group">';
+		echo 'Страницы:';
+		for ($i = 0; $i < $this->amountOfPages; $i++) { 
 			$offset = $i * $this->limit;
-			echo '<div class="input-group">';
-			echo 'Страницы:';
 			$isCurrent = NULL;
-			if ($i == $this->currentPage) $isCurrent = 'btn-current';
+			if ($i + 1 == $this->currentPage) $isCurrent = 'btn-current';
 			echo "<a class='btn btn-default {$isCurrent}' href=index.php?r=news/all&offset={$offset}>";
-			echo $i;
+			echo $i + 1;
 			echo "</a>";
-			echo '</div>';
 		}
+		echo '</div>';
 	}
 }
