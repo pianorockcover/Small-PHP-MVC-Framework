@@ -1,4 +1,8 @@
 <?php
+ini_set('xdebug.var_display_max_depth', 9);
+ini_set('xdebug.var_display_max_children', 1256);
+ini_set('xdebug.var_display_max_data', 2024);
+
 mb_internal_encoding("UTF-8");
 use application\Application;
 

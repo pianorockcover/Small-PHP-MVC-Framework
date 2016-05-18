@@ -1,5 +1,5 @@
 <a class="btn btn-default" href="index.php?r=news/add">Добавить новость</a>
-<a class="btn btn-default" href="#">Добавить категорию</a>
+<a class="btn btn-default" href="index.php?r=category/all">Добавить категорию</a>
 <a class="btn btn-default" href="#">Парсить новости</a>
 <?php foreach ($params['news'] as $news): ?>
 
