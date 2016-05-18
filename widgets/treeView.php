@@ -27,7 +27,7 @@ class TreeView implements Widget
 		$item .= '<form class="form" action="index.php" method="get">'
 			  	 .'<li>'
 			  	 .'<input  type="hidden" name="r" value="category/add">'
-			  	 .'<input  type="hidden" name="parent_id" value="'.$category['parent_id'].'">'
+			  	 .'<input  type="hidden" name="parent_id" value="'.$category['child_id'].'">'
 					 .'<input class="input" type="text" name="category_name" placeholder="Введите категорию">'
 					 ."<button class='btn btn-default' type='submit'>Добавить</button>"
 				 .'</li>'

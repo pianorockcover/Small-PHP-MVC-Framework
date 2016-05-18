@@ -40,7 +40,20 @@ class CategoryController extends Controller
 
 	public function actionAdd($params)
 	{
-		var_dump($params);
+		$category = new Category;
+		$category->query("INSERT INTO categories 
+									(`name`)
+								  VALUES ('{$params['category_name']}');");
+
+		$category->execute();
+
+		$category->query(" INSERT INTO parent_category 
+									(`child_id`, `parent_id`)
+								  VALUES ('{$category->getLastInsertedId()}',
+								  		  '{$params['parent_id']}'); ");
+		$category->execute();
+		
+		return $this->actionAll(null);
 	} 
 
 	public function actionDelete($params)
