@@ -25,7 +25,7 @@ class NewsController extends Controller
 
 		$pagination = new Pagination(10, $params['offset'], $news);
 		$news->extendQuery(" WHERE {$news->table()}_id > {$pagination->offset()}
-							 ORDER BY news_id ASC
+							 ORDER BY news_id DESC
 							 LIMIT 10");
 		
 		$news = $news->execute();
@@ -151,7 +151,7 @@ class NewsController extends Controller
 		}
 
 		return $this->actionFullView(['news_id' => $news->getLastInsertedId()]);
-		
+
 	}
 
 	public function actionFullView($params)

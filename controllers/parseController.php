@@ -25,6 +25,7 @@ class ParseController extends Controller {
 		foreach (glob('assets/images/*.jpg') as $file)
 		unlink($file);
 
+		$allNews = array_reverse($allNews);
 		foreach ($allNews as $news) {
 			$date = NULL;
 			preg_match_all('/<span class="title">(.*)<\/span>/U', $news, $date);
