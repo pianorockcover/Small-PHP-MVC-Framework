@@ -14,6 +14,13 @@
 						<?= $params['news']['content'] ?>
 						<span class="muted date"><?= $params['news']['date'] ?></span>
 					</p>	
+					<p>
+						<b>Категория:</b>
+						<?php if (!$params['news']['category']): ?>
+							Нет
+						<?php endif; ?>
+						<?= $params['news']['category'] ?>
+					</p>
 
 					<a class="btn btn-primary" href="index.php?r=news/edit&news_id=<?= $params['news']['news_id'] ?>">Редактировать</a>
 					<a class="btn btn-danger" href="index.php?r=news/delete&news_id=<?= $params['news']['news_id'] ?>">Удалить</a>

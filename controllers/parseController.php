@@ -21,6 +21,10 @@ class ParseController extends Controller {
 		$newsModel->query("TRUNCATE TABLE news");
 		$newsModel->execute();
 
+		if (file_exists('assets/images'))
+		foreach (glob('assets/images/*.jpg') as $file)
+		unlink($file);
+
 		foreach ($allNews as $news) {
 			$date = NULL;
 			preg_match_all('/<span class="title">(.*)<\/span>/U', $news, $date);

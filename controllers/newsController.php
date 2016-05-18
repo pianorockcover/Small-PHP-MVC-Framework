@@ -98,7 +98,7 @@ class NewsController extends Controller
 								  		news.category_id = '{$params['category']}'
 								  WHERE news_id ='{$params['news_id']}'");
 		$news->execute();
-		return $this->actionAll(['offset' => 0]);
+		return $this->actionFullView(['news_id' => $params['news_id']]);
 	}
 
 	public function actionDelete($params)
@@ -150,7 +150,8 @@ class NewsController extends Controller
 			file_put_contents("assets/images/{$news->getLastInsertedId()}.jpg", file_get_contents($image['tmp_name']));
 		}
 
-		return $this->actionAll(['offset' => 0]);
+		return $this->actionFullView(['news_id' => $news->getLastInsertedId()]);
+		
 	}
 
 	public function actionFullView($params)
