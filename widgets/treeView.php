@@ -24,10 +24,14 @@ class TreeView implements Widget
 			if(isset($category['children'])){
 				$item .= '<li>'. $this->showCat($category['children']) .'</li>';
 			}
-		$item .= '<li>'
-				 .'<input class="input" type="text" name="category_name" placeholder="Введите название категории">'
-				 ."<a class='btn btn-default' href='index.php?r=category/add&parent_id={$category['parent_id']}'>Добавить</a>"
-				 .'</li>';
+		$item .= '<form class="form" action="index.php" method="get">'
+			  	 .'<li>'
+			  	 .'<input  type="hidden" name="r" value="category/add">'
+			  	 .'<input  type="hidden" name="parent_id" value="'.$category['parent_id'].'">'
+					 .'<input class="input" type="text" name="category_name" placeholder="Введите категорию">'
+					 ."<button class='btn btn-default' type='submit'>Добавить</button>"
+				 .'</li>'
+			  .'</form>';
 		$item .= '</ul>';
 		return $item;
 	}

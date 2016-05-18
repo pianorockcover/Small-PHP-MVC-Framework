@@ -37,4 +37,19 @@ class CategoryController extends Controller
 
 		return $this->render('categories', 'main', ['categories' => $tree]); 
 	}
+
+	public function actionAdd($params)
+	{
+		var_dump($params);
+	} 
+
+	public function actionDelete($params)
+	{
+		var_dump($params);
+	}
+
+	public function actionUpdate($params)
+	{
+		var_dump($params);
+	}
 }
