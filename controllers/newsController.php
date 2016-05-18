@@ -23,11 +23,13 @@ class NewsController extends Controller
 					  LEFT JOIN categories 
 					  ON {$news->table()}.category_id = categories.category_id");
 
+		$amountOfRecords = $news->amountOfRecords();
+		$offset = abs($amountOfRecords - $params['offset']) + 1;
+
 		$pagination = new Pagination(10, $params['offset'], $news);
-		$news->extendQuery(" WHERE {$news->table()}_id > {$pagination->offset()}
+		$news->extendQuery(" WHERE news_id < $offset
 							 ORDER BY news_id DESC
 							 LIMIT 10");
-		
 		$news = $news->execute();
 
 		return $this->render('index','main', ['title' => 'Все новости',

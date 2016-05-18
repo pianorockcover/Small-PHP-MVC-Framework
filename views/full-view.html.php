@@ -11,10 +11,10 @@
 				</td>
 				<td class="media-body">
 					<h4><?= $params['news']['title'] ?></h4>
-					<p>
+					<div>
 						<?= $params['news']['summary'] ?>
+					</div>
 					<p>
-					</p>
 						<?= $params['news']['content'] ?>
 						<span class="muted date"><?= $params['news']['date'] ?></span>
 					</p>	

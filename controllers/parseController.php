@@ -11,7 +11,7 @@ class ParseController extends Controller {
 		$allNews = [];
 
 		$site = iconv(mb_detect_encoding($site, mb_detect_order(), true), "UTF-8", $site);
-
+		// $site = iconv('WINDOWS-1251', 'UTF-8', $site);
 		preg_match_all('/<div class="news-record record_feed_list">(.*)<\/noindex>/U', $site, $allNews);
 
 		$allNews = $allNews[1];
@@ -26,6 +26,7 @@ class ParseController extends Controller {
 		unlink($file);
 
 		$allNews = array_reverse($allNews);
+
 		foreach ($allNews as $news) {
 			$date = NULL;
 			preg_match_all('/<span class="title">(.*)<\/span>/U', $news, $date);
