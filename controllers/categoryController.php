@@ -35,7 +35,10 @@ class CategoryController extends Controller
 		}
 		$tree = $tree[0]['children'];
 
-		return $this->render('categories', 'main', ['categories' => $tree]); 
+		return $this->render('categories', 'main', [
+				'title' => 'Категории',
+				'categories' => $tree,
+			]); 
 	}
 
 	public function actionAdd($params)

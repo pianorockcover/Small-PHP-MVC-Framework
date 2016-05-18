@@ -30,7 +30,7 @@ class NewsController extends Controller
 		
 		$news = $news->execute();
 
-		return $this->render('index','main', ['title' => 'All News',
+		return $this->render('index','main', ['title' => 'Все новости',
 											  'news' => $news,
 											  'pagination' => $pagination]);
 	}
@@ -122,7 +122,10 @@ class NewsController extends Controller
 							FROM categories");
 		$categories = $categories->execute();
 
-		return $this->render('add','main', ['categories' => $categories]);
+		return $this->render('add','main', [
+				'title' => 'Добавить новость',
+				'categories' => $categories,
+			]);
 	}
 
 	public function actionInsert($params)
