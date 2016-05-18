@@ -11,10 +11,19 @@ class ParseController extends Controller {
 		$allNews = [];
 
 		$site = iconv(mb_detect_encoding($site, mb_detect_order(), true), "UTF-8", $site);
-		// preg_match_all('/^([а-яА-ЯЁёa-zA-Z0-9_]+)$/u', $site, $allNews);
-	preg_match_all('/<div class="news-record record_feed_list">(.*)<\/div>/U', $site, $allNews);
 
-		var_dump($allNews[1]);
+		preg_match_all('/<div class="news-record record_feed_list">(.*)<\/div>/U', $site, $allNews);
+
+		$allNews = $allNews[1];
+		$upToDateNews = [];
+		foreach ($allNews as $news) {
+			$date = NULL;
+			preg_match_all('/<span class="title">(.*)<\/span>/U', $news, $date);
+			$date = $date[1][0];
+			array_push($upToDateNews, ['date' => $date]);
+		}
+
+		var_dump($upToDateNews);
 		exit();
 	}
 }
