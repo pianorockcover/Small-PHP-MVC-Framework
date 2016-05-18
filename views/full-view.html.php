@@ -3,7 +3,11 @@
 		<tbody>
 			<tr>
 				<td class="media-left">
-					<img src="assets/images/<?= $params['news']['news_id'] ?>.jpg" alt="Нет изображения">
+					<?php $fileName = "assets/images/{$params['news']['news_id']}.jpg"; ?>
+					<?php if (!file_exists("assets/images/{$params['news']['news_id']}.jpg")): ?>
+						<?php $fileName = "assets/placeholder.png"; ?>
+					<?php endif; ?>
+					<img src="<?= $fileName ?>" alt="Нет изображения">
 				</td>
 				<td class="media-body">
 					<h4><?= $params['news']['title'] ?></h4>

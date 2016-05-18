@@ -38,7 +38,8 @@ class ParseController extends Controller {
 			$news = substr($news, strpos($news, '<noindex>'));
 			preg_match_all('/<noindex>(.*)$/U', $news, $summary);
 
-			$summary = strip_tags($summary[1][0]);
+			$summary = strip_tags($summary[1][0],'<p>');
+			$summary = str_replace(' style="text-align: justify;"', '', $summary);
 			$date = $this->dateConvert($date);
 
 		    $upToDateNews['date'] = $date;
