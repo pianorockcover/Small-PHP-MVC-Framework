@@ -77,7 +77,6 @@ class CategoryController extends Controller
 		$category->query("DELETE FROM parent_category
 								  WHERE child_id = '{$params['category_id']}'; ");
 		$category->execute();
-		// exit();	
 
 		$category->execute();
 		return $this->actionAll(null);

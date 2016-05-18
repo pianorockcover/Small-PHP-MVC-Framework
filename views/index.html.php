@@ -1,6 +1,4 @@
-<a class="btn btn-default" href="index.php?r=news/add">Добавить новость</a>
-<a class="btn btn-default" href="index.php?r=category/all">Категории</a>
-<a class="btn btn-default" href="#">Парсить новости</a>
+
 <?php foreach ($params['news'] as $news): ?>
 
 <div class="media-news">
@@ -15,6 +13,13 @@
 					<p>
 						<?= $news['summary'] ?>
 						<a class="read-more" href="index.php?r=news/fullView&news_id=<?=$news['news_id']?>">Читать далее...</a>		
+						<p>
+							<b>Категория:</b>
+							<?php if (!$news['category']): ?>
+								Нет
+							<?php endif; ?>
+							<?= $news['category'] ?>
+						</p>
 						<span class="muted date"><?= $news['date'] ?></span>
 					</p>	
 					<a class="btn btn-primary" href="index.php?r=news/edit&news_id=<?= $news['news_id'] ?>">Редактировать</a>

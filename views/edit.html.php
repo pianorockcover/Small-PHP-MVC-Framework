@@ -1,4 +1,3 @@
-<a class="btn btn-default" href="index.php">На главную</a>
 <h1>Редактировать новость</h1>
 <form class="form" enctype="multipart/form-data" action="index.php" class="media-news" method = "post">
 	<input type="hidden" name="r" value="news/update">
@@ -20,6 +19,21 @@
 			<tr>
 				<td><b>Content:</b></td>
 				<td><textarea class="input textarea" name="content"><?= $params['news']['content'] ?></textarea></td>
+			</tr>
+			<tr>
+				<td><b>Category:</b></td>
+				<td>
+					<select name="category">
+					    <option disabled>Выберите категорию</option>
+					    <?php foreach($params['categories'] as $category): ?>
+					    	<?php $isSelected = NULL; ?>
+					    	<?php if(isset($category['isSelected'])) $isSelected = 'selected'; ?>
+					    	<option <?= $isSelected ?>  value="<?= $category['category_id'] ?>">
+					    		<?= $category['name'] ?>
+					    	</option>
+					    <?php endforeach; ?>
+				    </select>
+			    </td>
 			</tr>
 			<tr>
 				<td><b>Image:</b></td>

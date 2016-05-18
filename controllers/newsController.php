@@ -3,6 +3,7 @@ namespace controllers;
 
 use \application\Controller;
 use \models\News;
+use \models\Category;
 use \widgets\Pagination;
 use \application\QueryRegistry;
 
@@ -45,7 +46,8 @@ class NewsController extends Controller
 							 news.title,
 							 news.summary,
 							 news.content,
-							 categories.name as category
+							 categories.name as category_name,
+							 categories.category_id as category_id
 		 			  FROM {$news->table()}
 					  LEFT JOIN categories 
 					  ON {$news->table()}.category_id = categories.category_id
@@ -53,9 +55,22 @@ class NewsController extends Controller
 
 		$news = $news->execute()[0];
 
+		$categories = new Category;
+		$categories->query("SELECT *
+							FROM categories");
+		$categories = $categories->execute();
+
+		foreach ($categories as $key => $category) {
+			if ($news['category_id'] === $category['category_id'])
+			{
+				$categories[$key]['isSelected'] = 'selected';
+			}
+		}
+
 		return $this->render('edit', 'main', [
 				 'title' => $news['title'],
 				 'news' => $news,
+				 'categories' => $categories,
 			]);
 	}
 
@@ -79,7 +94,8 @@ class NewsController extends Controller
 								  SET news.title = '{$params['title']}',
 								  		news.date = '{$params['date']}',
 								  		news.summary = '{$params['summary']}',
-								  		news.content = '{$params['content']}'
+								  		news.content = '{$params['content']}',
+								  		news.category_id = '{$params['category']}'
 								  WHERE news_id ='{$params['news_id']}'");
 		$news->execute();
 		return $this->actionAll(['offset' => 0]);
@@ -98,7 +114,12 @@ class NewsController extends Controller
 
 	public function actionAdd($params)
 	{
-		return $this->render('add','main');
+		$categories = new Category;
+		$categories->query("SELECT *
+							FROM categories");
+		$categories = $categories->execute();
+
+		return $this->render('add','main', ['categories' => $categories]);
 	}
 
 	public function actionInsert($params)
@@ -111,11 +132,12 @@ class NewsController extends Controller
 
 		$news = new News;
 		$news->query("INSERT INTO {$news->table()} 
-									(`title`, `date`, `summary`, `content`)
+									(`title`, `date`, `summary`, `content`, `category_id`)
 								  VALUES ('{$params['title']}',
 								  		    '{$params['date']}',
 								  		    '{$params['summary']}',
-								  		    '{$params['content']}')");
+								  		    '{$params['content']}',
+								  		    '{$params['category']}')");
 		$news->execute();
 
 		$image = QueryRegistry::getInstance()->getFiles()['image'];

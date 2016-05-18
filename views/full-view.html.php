@@ -1,4 +1,3 @@
-<a class="btn btn-default" href="index.php">На главную</a>
 <div class="media-news">
 	<table>
 		<tbody>

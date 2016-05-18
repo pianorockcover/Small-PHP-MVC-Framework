@@ -17,6 +17,12 @@
 </head>
 <body>
 	<div class="container">
+	<nav>
+		<a class="btn btn-default" href="index.php">Все новости</a>
+		<a class="btn btn-default" href="index.php?r=news/add">Добавить новость</a>
+		<a class="btn btn-default" href="index.php?r=category/all">Категории</a>
+		<a class="btn btn-default" href="#">Парсить новости</a>
+	</nav>
 		<?= $content ?>
 	</div>
 </body>
