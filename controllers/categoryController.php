@@ -52,17 +52,35 @@ class CategoryController extends Controller
 								  VALUES ('{$category->getLastInsertedId()}',
 								  		  '{$params['parent_id']}'); ");
 		$category->execute();
-		
+
 		return $this->actionAll(null);
 	} 
 
-	public function actionDelete($params)
-	{
-		var_dump($params);
-	}
-
 	public function actionUpdate($params)
 	{
-		var_dump($params);
+		$category = new Category;
+		$category->query("UPDATE categories 
+								  SET name = '{$params['category_name']}'
+								  WHERE category_id ='{$params['category_id']}'; ");
+		$category->execute();
+		return $this->actionAll(null);
 	}
+
+	public function actionDelete($params)
+	{
+		$category = new Category;
+		$category->query("DELETE FROM categories 
+								  WHERE category_id = '{$params['category_id']}';
+						");
+		$category->execute();
+
+		$category->query("DELETE FROM parent_category
+								  WHERE child_id = '{$params['category_id']}'; ");
+		$category->execute();
+		// exit();	
+
+		$category->execute();
+		return $this->actionAll(null);
+	}
+
 }
