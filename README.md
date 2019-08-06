@@ -1,2 +1,2 @@
 # Small PHP MVC Framework
-Используется LESS, не забудьте обновить bower в папке assets
+Don't forget to update bower dependencies
